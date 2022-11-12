@@ -112,6 +112,7 @@ module.exports = class Stock {
     ctx.assert(code, 'code is required')
     ctx.assert(limit, 'limit is required')
     const list = await ctx.service.stock.loadDataFromPrevNDays(code, limit + 1, ctx)
+    ctx.logger.info('[loadRsiData] list: ', code, limit, list)
     const rsiList = list
       .map((item, index) => {
         if (index === 0) {
@@ -127,6 +128,7 @@ module.exports = class Stock {
     const downList = rsiList.filter(item => item.closeDiff < 0)
     const up = upList.reduce((acc, i) => acc + i.closeDiff, 0)
     const down = downList.reduce((acc, i) => acc + i.closeDiff, 0)
+    ctx.logger.info('[loadRsiData] data: ', code, up, down)
     const rsi = parseFloat((100 * up / (up + Math.abs(down))).toFixed(2))
     return rsi
   }
