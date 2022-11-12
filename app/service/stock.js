@@ -125,8 +125,9 @@ module.exports = class Stock {
       .slice(1)
     const upList = rsiList.filter(item => item.closeDiff >= 0)
     const downList = rsiList.filter(item => item.closeDiff < 0)
-    const up = upList.reduce((acc, i) => acc + i, 0)
-    const down = downList.reduce((acc, i) => acc + i, 0)
-    return parseFloat((100 * up / (up + Math.abs(down))).toFixed(2))
+    const up = upList.reduce((acc, i) => acc + i.closeDiff, 0)
+    const down = downList.reduce((acc, i) => acc + i.closeDiff, 0)
+    const rsi = parseFloat((100 * up / (up + Math.abs(down))).toFixed(2))
+    return rsi
   }
 }
