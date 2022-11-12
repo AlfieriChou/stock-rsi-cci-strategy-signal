@@ -81,9 +81,9 @@ module.exports = {
         group: 'STOCK_cci',
         pullInterval: 1000
       },
-      dma: {
+      rsi: {
         topic: 'STOCK',
-        group: 'STOCK_dma',
+        group: 'STOCK_rsi',
         pullInterval: 1000
       },
       backTest: {
