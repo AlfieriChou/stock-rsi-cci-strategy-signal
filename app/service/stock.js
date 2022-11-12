@@ -119,7 +119,7 @@ module.exports = class Stock {
         }
         return {
           ...item,
-          closeDiff: parseFloat((item.close - rsiList[index - 1].close).toFixed(4))
+          closeDiff: parseFloat((item.close - list[index - 1].close).toFixed(4))
         }
       })
       .slice(1)
@@ -127,6 +127,6 @@ module.exports = class Stock {
     const downList = rsiList.filter(item => item.closeDiff < 0)
     const up = upList.reduce((acc, i) => acc + i, 0)
     const down = downList.reduce((acc, i) => acc + i, 0)
-    return parseFloat(100 * up / (up + Math.abs(down)).toFixed(2))
+    return parseFloat((100 * up / (up + Math.abs(down))).toFixed(2))
   }
 }
