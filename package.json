@@ -1,0 +1,44 @@
+{
+  "name": "stock-rsi-cci-strategy-signal",
+  "version": "0.0.1",
+  "description": "rsi cci trading strategy",
+  "scripts": {
+    "dev": "NODE_ENV=development nodemon --inspect app.js",
+    "lint": "eslint --ext .js ./ --fix",
+    "prepare": "husky install",
+    "release": "standard-version"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@galenjs/bullmq": "^1.4.16",
+    "@galenjs/factories": "^1.4.0",
+    "@galenjs/framework-next": "1.4.17",
+    "@galenjs/schedule": "^1.4.6",
+    "@galenjs/swagger": "^1.4.0",
+    "date-fns": "^2.29.3",
+    "dotenv": "^16.0.3",
+    "expire-store": "^1.0.2",
+    "got": "^11",
+    "koa-body": "^5.0.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-compose": "^4.1.0",
+    "lodash": "^4.17.21",
+    "mysql2": "^2.3.3"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
+    "eslint": "^8.11.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.0",
+    "eslint-plugin-promise": "^6.1.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "nodemon": "^2.0.15",
+    "standard-version": "^9.5.0"
+  }
+}

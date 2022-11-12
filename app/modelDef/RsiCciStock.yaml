@@ -1,0 +1,71 @@
+properties:
+  id:
+    type: integer
+    autoIncrement: true
+    primaryKey: true
+  createdAt:
+    type: date
+    allowNull: false
+  updatedAt:
+    type: date
+    allowNull: false
+  deletedAt:
+    type: date
+  name:
+    type: string
+    length: 64
+    description: '名称'
+  code:
+    type: string
+    length: 32
+    description: '编码'
+  latestBuyPrice:
+    type: float
+    default: 0
+    description: '上一次买入净值'
+  latestSellPrice:
+    type: float
+    default: 0
+    description: '上一次买入净值'
+  currentWorth:
+    type: float
+    description: '当前净值'
+  cciFirstElementDays:
+    type: integer
+    default: 20
+    description: 'cci第一因子数据计算天数'
+  cciSecondElement:
+    type: float
+    default: 0.015
+    description: 'cci第二因子'
+  rsiFirstElementDays:
+    type: integer
+    default: 11
+    description: 'rsi第一个因子数据计算天数'
+  rsiSecondElementDays:
+    type: integer
+    default: 22
+    description: 'rsi第二个因子数据计算天数'
+  rsiFirstElementValue:
+    type: float
+    description: 'rsi第一个因子数据计算值'
+  rsiSecondElementValue:
+    type: float
+    description: 'rsi第二个因子数据计算值'
+  cci:
+    type: float
+    description: 'cci计算值'
+  rsiDiff:
+    type: float
+    description: 'rsi差值'
+  isHolding:
+    type: boolean
+    default: false
+    description: 'cci-rsi策略是否持有'
+relations:
+  rsiCciStockLogs:
+    type: 'hasMany'
+    model: 'RsiCciStockLog'
+  rsiCciStockTradeLogs:
+    type: 'hasMany'
+    model: 'RsiCciStockTradeLog'

@@ -1,0 +1,45 @@
+properties:
+  id:
+    type: string
+    primaryKey: true
+    index: true
+    length: 32
+  date:
+    type: date
+    description: '日期'
+  open:
+    type: float
+    description: '开盘净值'
+  close:
+    type: float
+    description: '收盘净值'
+  high:
+    type: float
+    description: '当日最高净值'
+  low:
+    type: float
+    description: '当日最低净值'
+  rsiFirstElementValue:
+    type: float
+    description: 'rsi第一个因子数据计算值'
+  rsiSecondElementValue:
+    type: float
+    description: 'rsi第二个因子数据计算值'
+  cci:
+    type: float
+    description: 'cci计算值'
+  rsiDiff:
+    type: float
+    description: 'rsi差值'
+  createdAt:
+    type: date
+    allowNull: false
+  updatedAt:
+    type: date
+    allowNull: false
+  deletedAt:
+    type: date
+relations:
+  rsiCciStock:
+    type: 'belongsTo'
+    model: 'RsiCciStock'

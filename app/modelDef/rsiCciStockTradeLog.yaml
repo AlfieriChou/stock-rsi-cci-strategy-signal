@@ -1,0 +1,32 @@
+properties:
+  id:
+    type: integer
+    autoIncrement: true
+    primaryKey: true
+  type:
+    type: string
+    enum:
+      - 'BUY'
+      - 'SELL'
+    description: '类型 BUY-买入 SELL-卖出'
+  price:
+    type: float
+    description: '操作价格'
+  operateAt:
+    type: date
+    description: '日期'
+  operateLog:
+    type: object
+    description: '操作信息'
+  createdAt:
+    type: date
+    allowNull: false
+  updatedAt:
+    type: date
+    allowNull: false
+  deletedAt:
+    type: date
+relations:
+  rsiCciStock:
+    type: 'belongsTo'
+    model: 'RsiCciStock'

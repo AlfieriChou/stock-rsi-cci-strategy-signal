@@ -1,0 +1,54 @@
+dialect: 'virtual'
+
+remoteMethods:
+  remoteHtmlDoc:
+    path: '/apiDoc'
+    responseType: 'origin'
+    method: 'get'
+    tags:
+      - swagger
+    summary: 'api文档'
+    output:
+      304:
+        type: html
+  remoteJsonDoc:
+    path: '/swagger.json'
+    responseType: 'origin'
+    method: 'get'
+    tags:
+      - swagger
+    summary: 'swagger json 数据文档'
+    output:
+      200:
+        type: object
+        result:
+          # cSpell: ignore openapi
+          openapi:
+            type: string
+          info:
+            type: object
+            properties:
+              title:
+                type: string
+              version:
+                type: string
+              contact:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  email:
+                    type: string
+                  url:
+                    type: string
+              license:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  url:
+                    type: string
+          paths:
+            type: object
+          components:
+            type: object
