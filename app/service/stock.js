@@ -104,4 +104,29 @@ module.exports = class Stock {
       })
     return this.ma({ list: maList, deflate, limit })
   }
+
+  async loadRsiData ({
+    code, limit, deflate
+  }, ctx) {
+    ctx.assert(deflate, 'deflate is required')
+    ctx.assert(code, 'code is required')
+    ctx.assert(limit, 'limit is required')
+    const list = await ctx.service.stock.loadDataFromPrevNDays(code, limit + 1, ctx)
+    const rsiList = list
+      .map((item, index) => {
+        if (index === 0) {
+          return item
+        }
+        return {
+          ...item,
+          closeDiff: parseFloat((item.close - rsiList[index - 1].close).toFixed(4))
+        }
+      })
+      .slice(1)
+    const upList = rsiList.filter(item => item.closeDiff >= 0)
+    const downList = rsiList.filter(item => item.closeDiff < 0)
+    const up = upList.reduce((acc, i) => acc + i, 0)
+    const down = downList.reduce((acc, i) => acc + i, 0)
+    return parseFloat(100 * up / (up + Math.abs(down)).toFixed(2))
+  }
 }
