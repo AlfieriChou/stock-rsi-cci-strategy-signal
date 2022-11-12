@@ -27,18 +27,12 @@ module.exports = class Trade {
     const [{
       close, open, high, low
     }] = await ctx.service.stock.loadDataFromPrevNDays(stock.code, 1, ctx)
-    const ma = await ctx.service.stock.loadMaData({
+    const cci = await ctx.service.stock.loadCciData({
       code: stock.code,
       limit: stock.cciFirstElementDays,
-      deflate: item => item.close
+      coefficient: stock.cciSecondElement
     }, ctx)
-    const md = await ctx.service.stock.loadMdData({
-      code: stock.code,
-      limit: stock.cciFirstElementDays,
-      deflate: item => Math.abs(item.ma - item.close)
-    }, ctx)
-    const tp = parseFloat(((close + high + low) / 3).toFixed(4))
-    const cci = (tp - ma) / md / stock.cciSecondElement
+    ctx.logger.info('[queue] cci: ', id, stock.code, cci)
     await ctx.models.RsiCciStock.update({
       currentWorth,
       cci

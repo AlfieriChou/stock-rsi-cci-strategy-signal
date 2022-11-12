@@ -68,7 +68,7 @@ module.exports = class Stock {
     list, deflate, limit
   }) {
     const total = list.reduce((sum, item) => sum + deflate(item), 0)
-    return parseFloat((total / limit).toFixed(4))
+    return total / limit
   }
 
   async loadMaData ({
@@ -102,7 +102,33 @@ module.exports = class Stock {
           ma
         }
       })
-    return this.ma({ list: maList, deflate, limit })
+    return parseFloat(this.ma({ list: maList, deflate, limit }).toFixed(2))
+  }
+
+  async loadCciData ({
+    code, limit, coefficient = 0.015
+  }, ctx) {
+    ctx.assert(code, 'code is required')
+    ctx.assert(limit, 'limit is required')
+    const list = await ctx.service.stock.loadDataFromPrevNDays(code, limit, ctx)
+    ctx.logger.info('[loadCciData] list: ', code, limit, list)
+    const typList = list.map(item => {
+      return {
+        ...item,
+        typ: (item.close + item.high + item.low) / 3
+      }
+    })
+    const typMa = this.ma({
+      list: typList, deflate: item => item.typ, limit
+    })
+    const avedenTyp = Math.sqrt(
+      typList.reduce((ret, item) => {
+        return ret + Math.pow(typMa - item.typ, 2)
+      }, 0) / limit,
+      2
+    )
+    const { typ } = typList.pop()
+    return parseFloat(((typ - typMa) / (coefficient * avedenTyp)).toFixed(2))
   }
 
   async loadRsiData ({
@@ -120,7 +146,7 @@ module.exports = class Stock {
         }
         return {
           ...item,
-          closeDiff: parseFloat((item.close - list[index - 1].close).toFixed(4))
+          closeDiff: item.close - list[index - 1].close
         }
       })
       .slice(1)
