@@ -1,4 +1,5 @@
 const { startOfDay } = require('date-fns')
+const { sleep } = require('@galenjs/factories/sleep')
 
 module.exports = class Trade {
   async onMsg (msg, ctx) {
@@ -20,10 +21,10 @@ module.exports = class Trade {
   }
 
   async syncHistoryData (code, ctx) {
-    const list = await ctx.service.loadDataFromPrevNDays(code, 16392, ctx)
+    const list = await ctx.service.stock.loadDataFromPrevNDays(code, 16392, ctx)
     while (list.length) {
-      await ctx.models.StockTimeLine.bulkCreate(list.splice(0, 50).map(item => {
-        const date = startOfDay(item.day).getTime()
+      await ctx.models.StockTimeLine.bulkCreate(list.splice(0, 100).map(item => {
+        const date = startOfDay(new Date(item.day)).getTime()
         return {
           id: `${code}_${date}`,
           code,
@@ -33,6 +34,7 @@ module.exports = class Trade {
       }), {
         updateOnDuplicate: ['open', 'close', 'high', 'low']
       })
+      await sleep(1000)
     }
     ctx.logger.info('[queue] syncHistoryData done ', code)
   }

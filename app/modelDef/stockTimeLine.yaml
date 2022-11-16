@@ -30,3 +30,11 @@ properties:
   low:
     type: float
     description: '当日最低净值'
+  createdAt:
+    type: date
+    allowNull: false
+  updatedAt:
+    type: date
+    allowNull: false
+  deletedAt:
+    type: date
