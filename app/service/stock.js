@@ -150,12 +150,14 @@ module.exports = class Stock {
         }
       })
       .slice(1)
+    ctx.logger.info('[loadRsiData] rsi list: ', code, limit, rsiList)
     const upList = rsiList.filter(item => item.closeDiff >= 0)
     const downList = rsiList.filter(item => item.closeDiff < 0)
-    const up = upList.reduce((acc, i) => acc + i.closeDiff, 0)
-    const down = downList.reduce((acc, i) => acc + i.closeDiff, 0)
-    ctx.logger.info('[loadRsiData] data: ', code, up, down)
-    const rsi = parseFloat((100 * up / (up + Math.abs(down))).toFixed(2))
+    const avgUp = upList.reduce((acc, i) => acc + i.closeDiff, 0) / limit
+    const avgDown = downList.reduce((acc, i) => acc + Math.abs(i.closeDiff), 0) / limit
+    const rs = avgUp / avgDown
+    const rsi = parseFloat((100 - (100 / (1 + rs))).toFixed(2))
+    ctx.logger.info('[loadRsiData] data: ', code, avgUp, avgDown, rsi)
     return rsi
   }
 }
