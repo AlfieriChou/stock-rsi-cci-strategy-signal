@@ -111,7 +111,7 @@ module.exports = Model => {
       }
     }
 
-    static async syncHistory (ctx) {
+    static async history (ctx) {
       const { code } = ctx.request.body
       await ctx.sendMsg('history', 'STOCK', {
         code

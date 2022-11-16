@@ -90,6 +90,11 @@ module.exports = {
         topic: 'STOCK',
         group: 'STOCK_backTest',
         pullInterval: 1000
+      },
+      history: {
+        topic: 'STOCK',
+        group: 'STOCK_history',
+        pullInterval: 1000
       }
     }
   },

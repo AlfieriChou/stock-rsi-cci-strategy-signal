@@ -3,7 +3,7 @@ properties:
     type: string
     primaryKey: true
     index: true
-    length: 32
+    length: 60
   code:
     type: string
     primaryKey: true
@@ -14,6 +14,10 @@ properties:
     type: date
     index: true
     description: '日期'
+  day:
+    type: string
+    index: true
+    description: '日期字符串'
   open:
     type: float
     description: '开盘净值'
