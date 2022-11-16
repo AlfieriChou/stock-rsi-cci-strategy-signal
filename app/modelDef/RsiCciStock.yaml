@@ -69,3 +69,23 @@ relations:
   rsiCciStockTradeLogs:
     type: 'hasMany'
     model: 'RsiCciStockTradeLog'
+remoteMethods:
+  syncHistory:
+    path: '/history'
+    method: 'post'
+    tags:
+      - 'rsiCciStock'
+    summary: '同步历史数据'
+    requestBody:
+      body:
+        code:
+          type: string
+          description: '代码'
+      required:
+        - 'code'
+    output:
+      200:
+        type: 'object'
+        result:
+          success:
+            type: 'boolean'
