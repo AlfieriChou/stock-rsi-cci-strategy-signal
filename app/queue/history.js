@@ -34,7 +34,8 @@ module.exports = class Trade {
       }), {
         updateOnDuplicate: ['open', 'close', 'high', 'low']
       })
-      await sleep(1000)
+      ctx.logger.info('[queue] write 100 line done ', code, list.length)
+      await sleep(100)
     }
     ctx.logger.info('[queue] syncHistoryData done ', code)
   }
