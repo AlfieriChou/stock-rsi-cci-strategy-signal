@@ -1,0 +1,40 @@
+properties:
+  id:
+    type: string
+    primaryKey: true
+    index: true
+    length: 60
+  code:
+    type: string
+    primaryKey: true
+    index: true
+    length: 32
+    description: '编码'
+  date:
+    type: date
+    index: true
+    description: '日期'
+  day:
+    type: string
+    index: true
+    description: '日期字符串'
+  open:
+    type: float
+    description: '开盘净值'
+  close:
+    type: float
+    description: '收盘净值'
+  high:
+    type: float
+    description: '当日最高净值'
+  low:
+    type: float
+    description: '当日最低净值'
+  createdAt:
+    type: date
+    allowNull: false
+  updatedAt:
+    type: date
+    allowNull: false
+  deletedAt:
+    type: date
