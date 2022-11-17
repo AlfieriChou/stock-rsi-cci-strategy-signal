@@ -97,7 +97,7 @@ module.exports = Model => {
     }
 
     static async writeDailyReport (id, data, ctx) {
-      if (!(await ctx.models.Holiday.isHoliday(ctx))) {
+      if (!(await ctx.models.Holiday.isHoliday())) {
         const date = startOfToday().getTime()
         const keys = Object.keys(data)
         await ctx.models.RsiCciStockLog.bulkCreate([{

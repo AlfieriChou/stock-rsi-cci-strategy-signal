@@ -32,7 +32,7 @@ properties:
     description: '当前净值'
   cciFirstElementDays:
     type: integer
-    default: 20
+    default: 14
     description: 'cci第一因子数据计算天数'
   cciSecondElement:
     type: float
