@@ -121,14 +121,14 @@ module.exports = class Stock {
     const typMa = this.ma({
       list: typList, deflate: item => item.typ, limit
     })
-    const avedenTyp = Math.sqrt(
+    const aveDenTyp = Math.sqrt(
       typList.reduce((ret, item) => {
         return ret + Math.pow(typMa - item.typ, 2)
       }, 0) / limit,
       2
     )
     const { typ } = typList.pop()
-    return parseFloat(((typ - typMa) / (coefficient * avedenTyp)).toFixed(2))
+    return parseFloat(((typ - typMa) / (coefficient * aveDenTyp)).toFixed(2))
   }
 
   async loadRsiData ({
