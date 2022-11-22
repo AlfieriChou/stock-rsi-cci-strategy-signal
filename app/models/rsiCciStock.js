@@ -19,7 +19,7 @@ module.exports = Model => {
         ctx.throw(400, `existing stock ${body.code}`)
       }
       try {
-        const currentRet = await ctx.service.stock.getCurrentInfo(body.code, ctx)
+        const currentRet = await ctx.stock.getCurrentInfo(body.code)
         ctx.logger.info('stock current info: ', body.code, currentRet)
         ctx.request.body.currentWorth = currentRet.currentWorth
         return super.remoteCreate(ctx)

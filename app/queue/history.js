@@ -21,7 +21,7 @@ module.exports = class Trade {
   }
 
   async syncHistoryData (code, ctx) {
-    const list = await ctx.service.stock.loadDataFromPrevNDays(code, 16392, ctx)
+    const list = await ctx.stock.loadDataFromPrevNDays(code, 16392)
     while (list.length) {
       await ctx.models.StockTimeLine.bulkCreate(list.splice(0, 100).map(item => {
         const date = startOfDay(new Date(item.day)).getTime()

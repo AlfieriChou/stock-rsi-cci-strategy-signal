@@ -8,6 +8,7 @@ specifiers:
   '@galenjs/framework-next': 1.4.17
   '@galenjs/schedule': ^1.4.6
   '@galenjs/swagger': ^1.4.0
+  '@request-sdk/stock': ^0.0.8
   date-fns: ^2.29.3
   dotenv: ^16.0.3
   eslint: ^8.11.0
@@ -34,6 +35,7 @@ dependencies:
   '@galenjs/framework-next': 1.4.17_sraicxu7jh6nqvugrm36gp3neu
   '@galenjs/schedule': 1.4.6
   '@galenjs/swagger': 1.4.0
+  '@request-sdk/stock': 0.0.8
   date-fns: 2.29.3
   dotenv: 16.0.3
   expire-store: 1.0.2
@@ -555,6 +557,19 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.13.0
     dev: true
+
+  /@request-sdk/base/0.0.8:
+    resolution: {integrity: sha512-D3Ek1dYoMdUpksc2m5+7vYUCq8n3kihGRuI8sAub64KwtKjjBsrIsiRryVm+a9bh3r0CFDkiQ1WFq0z7CzfRLQ==}
+    dependencies:
+      shortid: 2.2.16
+    dev: false
+
+  /@request-sdk/stock/0.0.8:
+    resolution: {integrity: sha512-BRcGY4zXR0crt6QXEeN8GLNgnkK50kSNRG2TtjVZoCMachC/tbVMLbEcTasnSljuHp5AwtDo5E+WNT8qAhr4VQ==}
+    dependencies:
+      '@request-sdk/base': 0.0.8
+      got: 11.8.5
+    dev: false
 
   /@sequelize/core/7.0.0-alpha.10_mysql2@2.3.3:
     resolution: {integrity: sha512-uikpWaCiIaijsgoa9cH+3jCQl8r+FaQPhoE8AOJYvPwxOx52E1JZnRPMXNnlpbFy3Xu0qekrc5LBJq7IR8UB0Q==}

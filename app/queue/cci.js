@@ -23,15 +23,15 @@ module.exports = class Trade {
       ctx.logger.warn('[queue] cci stock multi element strategy error: stock not found ', id)
       return
     }
-    const { currentWorth } = await ctx.service.stock.getCurrentInfo(stock.code, ctx)
+    const { currentWorth } = await ctx.stock.getCurrentInfo(stock.code)
     const [{
       close, open, high, low
-    }] = await ctx.service.stock.loadDataFromPrevNDays(stock.code, 1, ctx)
-    const cci = await ctx.service.stock.loadCciData({
+    }] = await ctx.stock.loadDataFromPrevNDays(stock.code, 1)
+    const cci = await ctx.stock.loadCciData({
       code: stock.code,
       limit: stock.cciFirstElementDays,
       coefficient: stock.cciSecondElement
-    }, ctx)
+    })
     ctx.logger.info('[queue] cci: ', id, stock.code, cci)
     await ctx.models.RsiCciStock.update({
       currentWorth,

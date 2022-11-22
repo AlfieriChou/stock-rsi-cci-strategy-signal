@@ -25,17 +25,17 @@ module.exports = class Trade {
     }
     const [{
       close, open, high, low
-    }] = await ctx.service.stock.loadDataFromPrevNDays(stock.code, 1, ctx)
-    const rsiFirstElementValue = await ctx.service.stock.loadRsiData({
+    }] = await ctx.stock.loadDataFromPrevNDays(stock.code, 1)
+    const rsiFirstElementValue = await ctx.stock.loadRsiData({
       code: stock.code,
       limit: stock.rsiFirstElementDays,
       deflate: item => item.close
-    }, ctx)
-    const rsiSecondElementValue = await ctx.service.stock.loadRsiData({
+    })
+    const rsiSecondElementValue = await ctx.stock.loadRsiData({
       code: stock.code,
       limit: stock.rsiSecondElementDays,
       deflate: item => item.close
-    }, ctx)
+    })
     const rsiDiff = rsiFirstElementValue - rsiSecondElementValue
     await ctx.models.RsiCciStock.update({
       rsiFirstElementValue,

@@ -5,6 +5,7 @@ const compose = require('koa-compose')
 
 const Schedule = require('@galenjs/schedule')
 const BullMq = require('@galenjs/bullmq')
+const StockApi = require('@request-sdk/stock')
 
 const config = require('./config')
 
@@ -21,6 +22,9 @@ class Framework extends BaseFramework {
       this.app.coreLogger.info('send bull mq message: ', ret)
       return ret
     }
+    this.app.context.stock = new StockApi({
+      logger: this.app.coreLogger
+    })
     this.schedule = new Schedule({
       schedulePath: this.config.schedulePath,
       app: this.app
